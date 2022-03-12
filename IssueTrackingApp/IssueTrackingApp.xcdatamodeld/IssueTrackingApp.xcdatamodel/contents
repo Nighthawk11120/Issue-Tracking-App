@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="HeaderSection" representedClassName=".HeaderSection" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateToOccur" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="daysToOccur" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="Array&lt;Int&gt;"/>
+        <attribute name="recurring" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="scheduleActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="userOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="sections" inverseEntity="Project"/>
+        <relationship name="taskHeaders" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ToDoHeader" inverseName="section" inverseEntity="ToDoHeader"/>
+    </entity>
+    <entity name="Project" representedClassName=".Project" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expanded" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="userOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="children_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="parent" inverseEntity="Project"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="children_" inverseEntity="Project"/>
+        <relationship name="sections" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HeaderSection" inverseName="project" inverseEntity="HeaderSection"/>
+    </entity>
+    <entity name="ToDo" representedClassName=".ToDo" syncable="YES" codeGenerationType="class">
+        <attribute name="bodyText" optional="YES" attributeType="String"/>
+        <attribute name="closed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dueDateEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="formattedText" optional="YES" attributeType="Binary"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="notifications" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="recurring" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="userOrder" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="children_" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ToDo" inverseName="parent" inverseEntity="ToDo"/>
+        <relationship name="header" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ToDoHeader" inverseName="tasks" inverseEntity="ToDoHeader"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ToDo" inverseName="children_" inverseEntity="ToDo"/>
+    </entity>
+    <entity name="ToDoHeader" representedClassName="ToDoHeader" syncable="YES" codeGenerationType="class">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="userOrder" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeaderSection" inverseName="taskHeaders" inverseEntity="HeaderSection"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ToDo" inverseName="header" inverseEntity="ToDo"/>
+    </entity>
+    <elements>
+        <element name="HeaderSection" positionX="-54" positionY="-9" width="128" height="194"/>
+        <element name="Project" positionX="-63" positionY="-18" width="128" height="164"/>
+        <element name="ToDo" positionX="-63" positionY="18" width="128" height="254"/>
+        <element name="ToDoHeader" positionX="-45" positionY="108" width="128" height="119"/>
+    </elements>
+</model>
